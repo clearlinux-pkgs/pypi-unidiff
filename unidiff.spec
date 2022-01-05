@@ -4,13 +4,14 @@
 #
 Name     : unidiff
 Version  : 0.7.0
-Release  : 2
+Release  : 3
 URL      : https://files.pythonhosted.org/packages/79/14/6c7d3edd327b37051d44ea1cb24562066ff579839d5f4c7691e9e7701c23/unidiff-0.7.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/79/14/6c7d3edd327b37051d44ea1cb24562066ff579839d5f4c7691e9e7701c23/unidiff-0.7.0.tar.gz
 Summary  : Unified diff parsing/metadata extraction library.
 Group    : Development/Tools
 License  : MIT
 Requires: unidiff-bin = %{version}-%{release}
+Requires: unidiff-license = %{version}-%{release}
 Requires: unidiff-python = %{version}-%{release}
 Requires: unidiff-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
@@ -23,9 +24,18 @@ Simple Python library to parse and interact with unified diff data.
 %package bin
 Summary: bin components for the unidiff package.
 Group: Binaries
+Requires: unidiff-license = %{version}-%{release}
 
 %description bin
 bin components for the unidiff package.
+
+
+%package license
+Summary: license components for the unidiff package.
+Group: Default
+
+%description license
+license components for the unidiff package.
 
 
 %package python
@@ -56,7 +66,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1637359092
+export SOURCE_DATE_EPOCH=1641420819
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -76,6 +86,8 @@ PYTHONPATH=%{buildroot}$(python -c "import sys; print(sys.path[-1])") python set
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/unidiff
+cp %{_builddir}/unidiff-0.7.0/LICENSE %{buildroot}/usr/share/package-licenses/unidiff/ce04486e71c1dae563844223832a26bfee186ff3
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -87,6 +99,10 @@ echo ----[ mark ]----
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/unidiff
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/unidiff/ce04486e71c1dae563844223832a26bfee186ff3
 
 %files python
 %defattr(-,root,root,-)
