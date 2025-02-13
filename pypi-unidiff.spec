@@ -7,7 +7,7 @@
 #
 Name     : pypi-unidiff
 Version  : 0.7.5
-Release  : 22
+Release  : 23
 URL      : https://files.pythonhosted.org/packages/a3/48/81be0ac96e423a877754153699731ef439fd7b80b4c8b5425c94ed079ebd/unidiff-0.7.5.tar.gz
 Source0  : https://files.pythonhosted.org/packages/a3/48/81be0ac96e423a877754153699731ef439fd7b80b4c8b5425c94ed079ebd/unidiff-0.7.5.tar.gz
 Summary  : Unified diff parsing/metadata extraction library.
